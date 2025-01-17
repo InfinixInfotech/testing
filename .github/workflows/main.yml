@@ -78,10 +78,10 @@ jobs:
           fi
 
           echo "Pulling the latest Docker image from Docker Hub..."
-          docker pull mayankvishwakarma08/infinixmailboxfrontend:latest
+          docker pull ${{ secrets.DOCKER_USERNAME }}/infinixmailboxfrontend:latest
           
           echo "Running new container on port 80..."
-          docker run -d -p 80:80 --name infinixmailboxfrontend mayankvishwakarma08/infinixmailboxfrontend:latest
+          docker run -d -p 80:80 --name infinixmailboxfrontend ${{ secrets.DOCKER_USERNAME }}/infinixmailboxfrontend:latest
           
           echo "Checking if the container is running..."
           docker ps  # Check if the container is running
