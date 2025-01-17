@@ -26,7 +26,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-
       # Run tests
       - name: Run Tests
         run: npm test
@@ -69,6 +68,8 @@ jobs:
       # Deploy Docker container locally
       - name: Deploy Docker Container
         run: |
-          docker stop infinixmailboxfrontend || true
-          docker rm infinixmailboxfrontend || true
+          if [ $(docker ps -q -f name=infinixmailboxfrontend) ]; then
+            docker stop infinixmailboxfrontend || true
+            docker rm infinixmailboxfrontend || true
+          fi
           docker run -d -p 80:80 --name infinixmailboxfrontend ${{ secrets.DOCKER_USERNAME }}/infinixmailboxfrontend:latest
