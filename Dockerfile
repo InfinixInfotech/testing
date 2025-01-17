@@ -5,13 +5,13 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json ./ 
 
 # Install dependencies
 RUN npm install
 
 # Copy the rest of the application code to the working directory
-COPY . .
+COPY . . 
 
 # Build the application for production
 RUN npm run build
@@ -22,7 +22,7 @@ FROM nginx:alpine AS production
 # Copy the build output to Nginx's HTML folder
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Expose the default Nginx port
+# Expose the default Nginx port (port 80)
 EXPOSE 80
 
 # Start Nginx server
