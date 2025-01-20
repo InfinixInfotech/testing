@@ -51,37 +51,24 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Set up Docker Buildx (for multi-platform builds)
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      # Log in to Docker registry
-      - name: Log in to Docker registry
-        run: |
-          echo ${{ secrets.DOCKER_USERNAME }} | docker login 192.168.1.216:5000 -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-
-      # Build Docker image
+      # Build and push Docker image to local registry
       - name: Build Docker Image
         run: |
+          # Build the Docker image with local IP address and tag
           docker build -t 192.168.1.216:5000/infinixmailboxfrontend:latest .
 
-      # Push Docker image to local registry
-      - name: Push Docker image to local registry
-        run: |
-          docker push 192.168.1.216:5000/infinixmailboxfrontend:latest
-
-      # Deploy Docker container on local server (directly on local server)
+      # Deploy Docker Container to local environment
       - name: Deploy Docker Container
         run: |
-          # Pull the latest image from the registry
-          docker pull 192.168.1.216:5000/infinixmailboxfrontend:latest
+          # Pull the latest image from the registry (in case it was pushed to a local registry)
+          # docker pull 192.168.1.216:5000/infinixmailboxfrontend:latest
           
-          # Stop and remove any previous container (if exists)
+          # Stop and remove any previous container if it exists
           docker stop infinixmailboxfrontend || true
           docker rm infinixmailboxfrontend || true
-          
-          # Run the new container on port 80
+
+          # Run the new container on port 80 (accessible via local IP)
           docker run -d -p 80:80 --name infinixmailboxfrontend 192.168.1.216:5000/infinixmailboxfrontend:latest
-          
-          # Verify if the container is running
+
+          # Verify the container is running
           docker ps
