@@ -62,7 +62,15 @@ jobs:
         run: |
           echo "Pulling the latest Docker image from local registry..."
           docker pull 192.168.1.216:5000/infinixmailboxfrontend:latest
-          echo "Running new container on port 80..."
-          docker run -d -p 80:80 --name infinixmailboxfrontend 192.168.1.216:5000/infinixmailboxfrontend:latest
+          
+          # Remove old container if exists (to avoid conflicts)
+          echo "Stopping and removing any existing container..."
+          docker stop infinixmailboxfrontend || true && docker rm infinixmailboxfrontend || true
+          
+          # Run new container on port 80, binding to local IP
+          echo "Running the new container on local IP (192.168.1.216) on port 80..."
+          docker run -d --name infinixmailboxfrontend -p 192.168.1.216:80:80 192.168.1.216:5000/infinixmailboxfrontend:latest
+          
+          # Check if the container is running
           echo "Checking if the container is running..."
           docker ps
