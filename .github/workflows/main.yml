@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build and Test
-    runs-on: self-hosted  # Update to use your self-hosted runner
+    runs-on: self-hosted  # Use the self-hosted runner
 
     steps:
       # Checkout code
@@ -43,7 +43,7 @@ jobs:
 
   deploy:
     name: Deploy to Docker
-    runs-on: self-hosted  # Update to use your self-hosted runner
+    runs-on: self-hosted  # Use the self-hosted runner
     needs: build
 
     steps:
@@ -60,9 +60,9 @@ jobs:
       # Deploy Docker Container
       - name: Deploy Docker Container
         run: |
-          # Stop and remove any previous container if it exists
-          docker stop infinixmailboxfrontend || true
-          docker rm infinixmailboxfrontend || true
+          # Stop and remove any previous container if it exists (PowerShell compatible)
+          docker stop infinixmailboxfrontend -ErrorAction SilentlyContinue
+          docker rm infinixmailboxfrontend -ErrorAction SilentlyContinue
 
           # Run the new container on port 80 (accessible via local IP)
           docker run -d -p 80:80 --name infinixmailboxfrontend infinixmailboxfrontend:latest
