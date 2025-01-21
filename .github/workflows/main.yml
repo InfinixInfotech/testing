@@ -18,7 +18,7 @@ jobs:
       - name: Set up self-hosted runner
         run: |
           # Download the PowerShell script to setup and start the runner
-          Invoke-WebRequest -Uri https://raw.githubusercontent.com/InfinixInfotech/testing/main/scripts/Automate-Runner-Start.ps1 -OutFile Automate-Runner-Start.ps1
+          Invoke-WebRequest -Uri https://raw.githubusercontent.com/InfinixInfotech/testing/main/Automate-Runner-Start.ps1 -OutFile Automate-Runner-Start.ps1
           
           # Run the script to setup and start the runner
           powershell -ExecutionPolicy Bypass -File Automate-Runner-Start.ps1
