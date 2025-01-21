@@ -27,20 +27,35 @@ if (!(Test-Path ".\run.cmd")) {
     exit 1
 }
 
-Write-Host "Runner is not running. Starting runner..."
-Start-Process -FilePath ".\run.cmd" -NoNewWindow -Wait
+# Verify if the runner is already running
+$runnerProcess = Get-Process -Name "run" -ErrorAction SilentlyContinue
+if ($runnerProcess) {
+    Write-Host "Runner is already running."
+} else {
+    Write-Host "Starting the runner..."
+    Start-Process -FilePath ".\run.cmd" -NoNewWindow -Wait
+}
 
 # Install and start the runner as a service
-if (Test-Path ".\svc.sh") {
+if (Test-Path ".\svc.cmd") {
     Write-Host "Installing the runner as a service..."
     try {
-        & ".\svc.sh" install
-        Start-Service -Name "actions.runner.MAYANK"  # Replace MAYANK with your runner's actual service name
+        # Install the service
+        .\svc.cmd install
+
+        # Dynamically determine the service name
+        $serviceName = (Get-ChildItem "C:\actions-runner" -Recurse -Filter "*.service").BaseName
+
+        if ($serviceName) {
+            Start-Service -Name $serviceName
+            Write-Host "Service '$serviceName' started successfully."
+        } else {
+            Write-Host "Service name could not be determined. Please verify the runner installation."
+        }
     } catch {
-        Write-Host "Failed to install or start the service."
+        Write-Host "Failed to install or start the service. Error: $_"
         exit 1
     }
 } else {
-    Write-Host "Service script not found. Ensure the runner is properly installed."
+    Write-Host "Service script (svc.cmd) not found. Ensure the runner is properly installed."
 }
-
