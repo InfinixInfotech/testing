@@ -7,9 +7,28 @@ on:
   pull_request:
 
 jobs:
+  setup-runner:
+    name: Setup Self-Hosted Runner
+    runs-on: windows-latest  # Use a Windows runner to configure the self-hosted runner
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up self-hosted runner
+        run: |
+          # Download the PowerShell script to setup and start the runner
+          Invoke-WebRequest -Uri https://raw.githubusercontent.com/InfinixInfotech/testing/main/scripts/Automate-Runner-Start.ps1 -OutFile Automate-Runner-Start.ps1
+          
+          # Run the script to setup and start the runner
+          powershell -ExecutionPolicy Bypass -File Automate-Runner-Start.ps1
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
   build:
     name: Build and Test
-    runs-on: self-hosted  # Use the self-hosted runner
+    runs-on: self-hosted  # Use the self-hosted runner after it's started
 
     steps:
       # Checkout code
