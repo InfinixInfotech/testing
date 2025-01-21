@@ -28,61 +28,63 @@ jobs:
 
   build:
     name: Build and Test
-    runs-on: self-hosted[MAYANK]  # Use the self-hosted runner with the "MAYANK" label
+    runs-on: self-hosted  # Use the self-hosted runner with the "MAYANK" label
+  labels:
+      - MAYANK  # Ensure the job runs on the runner with the "MAYANK" label
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+  steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
 
       # Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
+        - name: Set up Node.js
+          uses: actions/setup-node@v3
+          with:
           node-version: 18
 
       # Install dependencies
-      - name: Install Dependencies
-        run: npm install
+        - name: Install Dependencies
+          run: npm install
 
       # Run tests
-      - name: Run Tests
-        run: npm test
+        - name: Run Tests
+          run: npm test
 
       # Build the project
-      - name: Build Project
-        run: npm run build
+        - name: Build Project
+          run: npm run build
 
       # Upload build artifacts (optional, useful if you want to store build files)
-      - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-artifact
-          path: dist/
+        - name: Upload Build Artifacts
+          uses: actions/upload-artifact@v3
+          with:
+            name: build-artifact
+            path: dist/
 
   deploy:
     name: Deploy to Docker
-    runs-on: self-hosted[MAYANK]  # Use the self-hosted runner with the "MAYANK" label
-    needs: build
+    runs-on: self-hosted  # Use the self-hosted runner with the "MAYANK" label
+labels:
+      - MAYANK  # Ensure the job runs on the runner with the "MAYANK" label
+needs: build
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      steps:
+            - name: Checkout Code
+              uses: actions/checkout@v3
 
       # Build Docker Image
       - name: Build Docker Image
         run: |
           # Build the Docker image locally and tag it as 'latest'
           docker build -t infinixmailboxfrontend:latest .
-
+      
       # Deploy Docker Container
       - name: Deploy Docker Container
         run: |
           # Stop and remove any previous container if it exists (PowerShell compatible)
           docker stop infinixmailboxfrontend -ErrorAction SilentlyContinue
           docker rm infinixmailboxfrontend -ErrorAction SilentlyContinue
-
           # Run the new container on port 80 (accessible via local IP)
           docker run -d -p 80:80 --name infinixmailboxfrontend infinixmailboxfrontend:latest
-
           # Verify if the container is running
           docker ps
