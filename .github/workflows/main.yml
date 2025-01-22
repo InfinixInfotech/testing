@@ -51,10 +51,17 @@ jobs:
 
       - name: Stop and Remove Old Docker Container
         run: |
-          # Stop the old container if it exists
-          docker stop infinixmailboxfrontend -ErrorAction SilentlyContinue
-          # Remove the old container if it exists
-          docker rm infinixmailboxfrontend -ErrorAction SilentlyContinue
+          # Stop and remove the old container, suppress errors if they occur
+          try {
+            docker stop infinixmailboxfrontend
+          } catch {
+            Write-Host "No running container to stop."
+          }
+          try {
+            docker rm infinixmailboxfrontend
+          } catch {
+            Write-Host "No container to remove."
+          }
 
       - name: Deploy New Docker Container
         run: |
