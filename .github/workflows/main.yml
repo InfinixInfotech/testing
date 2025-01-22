@@ -7,53 +7,28 @@ on:
   pull_request:
 
 jobs:
-  setup-runner:
-    name: Setup Self-Hosted Runner
-    runs-on: windows-latest  # Use a Windows runner to configure the self-hosted runner
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up self-hosted runner
-        run: |
-          # Download the PowerShell script to setup and start the runner
-          Invoke-WebRequest -Uri https://raw.githubusercontent.com/InfinixInfotech/testing/main/scripts/Automate-Runner-Start.ps1 -OutFile Automate-Runner-Start.ps1
-          
-          # Run the script to setup and start the runner
-          powershell -ExecutionPolicy Bypass -File Automate-Runner-Start.ps1
-        shell: pwsh
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
   build:
     name: Build and Test
-    runs-on: self-hosted  # Use the self-hosted runner after it's started
+    runs-on: [self-hosted, MAYANK]  # Use the self-hosted runner with the "MAYANK" label
 
     steps:
-      # Checkout code
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      # Install dependencies
       - name: Install Dependencies
         run: npm install
 
-      # Run tests
       - name: Run Tests
         run: npm test
 
-      # Build the project
       - name: Build Project
         run: npm run build
 
-      # Upload build artifacts (optional, useful if you want to store build files)
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -62,29 +37,24 @@ jobs:
 
   deploy:
     name: Deploy to Docker
-    runs-on: self-hosted  # Use the self-hosted runner
-    needs: build
+    needs: build  # Ensure 'deploy' depends on 'build'
+    runs-on: [self-hosted, MAYANK]  # Use the self-hosted runner with the "MAYANK" label
 
     steps:
-      # Checkout code again
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Build Docker Image
       - name: Build Docker Image
         run: |
           # Build the Docker image locally and tag it as 'latest'
           docker build -t infinixmailboxfrontend:latest .
 
-      # Deploy Docker Container
       - name: Deploy Docker Container
         run: |
-          # Stop and remove any previous container if it exists (PowerShell compatible)
-          docker stop infinixmailboxfrontend -ErrorAction SilentlyContinue
-          docker rm infinixmailboxfrontend -ErrorAction SilentlyContinue
-
+          # Stop and remove any previous container if it exists
+          docker stop infinixmailboxfrontend || true
+          docker rm infinixmailboxfrontend || true
           # Run the new container on port 80 (accessible via local IP)
           docker run -d -p 80:80 --name infinixmailboxfrontend infinixmailboxfrontend:latest
-
           # Verify if the container is running
           docker ps
