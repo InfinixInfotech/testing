@@ -7,6 +7,25 @@ on:
   pull_request:
 
 jobs:
+  setup-runner:
+    name: Setup Self-Hosted Runner
+    runs-on: windows-latest  # Use a Windows runner to configure the self-hosted runner
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up self-hosted runner
+        run: |
+          # Download the PowerShell script to setup and start the runner
+          Invoke-WebRequest -Uri https://raw.githubusercontent.com/InfinixInfotech/testing/main/Automate-Runner-Start.ps1 -OutFile Automate-Runner-Start.ps1
+          
+          # Run the script to setup and start the runner
+          powershell -ExecutionPolicy Bypass -File Automate-Runner-Start.ps1
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
   build:
     name: Build and Test
     runs-on: [self-hosted, MAYANK]  # Use the self-hosted runner with the "MAYANK" label
@@ -48,7 +67,7 @@ jobs:
         run: |
           # Build the Docker image locally and tag it as 'latest'
           docker build -t infinixmailboxfrontend:latest .
-
+      
       - name: Deploy Docker Container
         run: |
           # Stop and remove any previous container if it exists
