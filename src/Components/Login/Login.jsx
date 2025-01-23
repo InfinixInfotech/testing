@@ -41,7 +41,7 @@ const LoginPage = () => {
     <div className="Login-Conatiner">
       <div className="login-page">
         <div className="welcome-banner">
-          <h1>////WIN-WEALTH ALGOS\\\\</h1>
+          <h1>Infinix-Infotech</h1>
         </div>
         <div className="login-container">
           <h2>Login</h2>
