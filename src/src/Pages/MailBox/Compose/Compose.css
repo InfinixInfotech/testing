@@ -1,0 +1,16 @@
+:root{
+  --composeLable-fontSize : 14px;
+  --composeBtn-fontSize : 14px;
+}
+
+.compose-lable{
+  font-size: var(--composeLable-fontSize);
+}
+
+.compose-btn{
+  font-size: var(--composeBtn-fontSize);
+}
+
+.col-6::-webkit-scrollbar {
+  display: none;  /* Hide the scrollbar */
+}

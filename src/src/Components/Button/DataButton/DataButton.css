@@ -1,0 +1,78 @@
+
+
+  :root{
+    --dataButton-padding: 5px 10px;
+    --dataButton-margin-left:12px;
+    --dataButton-background-color: rgb(156, 156, 156);
+    --dataButton-color : rgb(0, 0, 0);
+    --dataButton-border : none;
+    --dataButton-border-radius: 5px;
+    --dataButton-font-size: 15px;
+    --dataButton-font-weight: 600;
+    --dataButton-cursor: pointer; 
+      transition: all 0.3s ease;
+
+
+  }
+
+  .Copy-btn{
+    padding: var(--dataButton-padding);
+    margin-left: var(--dataButton-margin-left);
+    background-color: var(--dataButton-background-color);
+    color: var( --dataButton-color);
+    border: var( --dataButton-border );
+    border-radius: var( --dataButton-border-radius);
+    font-size: var(--dataButton-font-size);
+    font-weight: var(--dataButton-font-weight);
+    cursor: var(--dataButton-cursor);
+  }
+  
+  .Csv-btn{
+    padding: var(--dataButton-padding);
+    margin-left: var(--dataButton-margin-left);
+    background-color: var(--dataButton-background-color);
+    color: var( --dataButton-color);
+    border: var( --dataButton-border );
+    border-radius: var( --dataButton-border-radius);
+    font-size: var(--dataButton-font-size);
+    font-weight: var(--dataButton-font-weight);
+    cursor: var(--dataButton-cursor);
+  }
+
+  .Pdf-btn{
+    padding: var(--dataButton-padding);
+    margin-left: var(--dataButton-margin-left);
+    background-color: var(--dataButton-background-color);
+    color: var( --dataButton-color);
+    border: var( --dataButton-border );
+    border-radius: var( --dataButton-border-radius);
+    font-size: var(--dataButton-font-size);
+    font-weight: var(--dataButton-font-weight);
+    cursor: var(--dataButton-cursor);
+  }
+
+  .Print-btn{
+    padding: var(--dataButton-padding);
+    margin-left: var(--dataButton-margin-left);
+    background-color: var(--dataButton-background-color);
+    color: var( --dataButton-color);
+    border: var( --dataButton-border );
+    border-radius: var( --dataButton-border-radius);
+    font-size: var(--dataButton-font-size);
+    font-weight: var(--dataButton-font-weight);
+    cursor: var(--dataButton-cursor);
+  }
+
+
+  button.btn.btn-primary.mt-3.no-print:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5); /* Custom focus outline */
+  }
+  
+  /* Optional: Hide the button when printing */
+  @media print {
+    button.btn.btn-primary.mt-3.no-print {
+      display: none;
+    }
+  }
+   
