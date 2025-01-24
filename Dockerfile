@@ -14,13 +14,13 @@ RUN npm install
 COPY . . 
 
 # Build the application for production
-RUN npm run build
+RUN npm run build  # This will generate the build folder by default
 
 # Use an official Nginx image to serve the app
 FROM nginx:alpine AS production
 
 # Copy the build output to Nginx's HTML folder
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html  # Change 'dist' to 'build'
 
 # Expose the default Nginx port (port 80)
 EXPOSE 80
