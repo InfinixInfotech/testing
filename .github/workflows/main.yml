@@ -38,7 +38,7 @@ jobs:
   deploy:
     name: Deploy to Docker
     needs: build  # Ensure 'deploy' depends on 'build'
-    runs-on: [self-hosted, MAYANK]  # Use the self-hosted runner with the "MAYANK" label
+    runs-on: [self-hosted, "MAYANK"]  # Use the self-hosted runner with the "MAYANK" label
 
     steps:
       - name: Checkout Code
@@ -51,16 +51,18 @@ jobs:
 
       - name: Stop and Remove Old Docker Container
         run: |
-          # Stop and remove the old container, suppress errors if they occur
-          try {
+          # Check if the container exists and stop it if running
+          if (docker ps -q -f "name=infinixmailboxfrontend") {
             docker stop infinixmailboxfrontend
-          } catch {
-            Write-Host "No running container to stop."
+          } else {
+            Write-Host "No running container found to stop."
           }
-          try {
+          
+          # Check if the container exists and remove it if present
+          if (docker ps -a -q -f "name=infinixmailboxfrontend") {
             docker rm infinixmailboxfrontend
-          } catch {
-            Write-Host "No container to remove."
+          } else {
+            Write-Host "No container found to remove."
           }
 
       - name: Deploy New Docker Container
