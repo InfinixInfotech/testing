@@ -9,4 +9,4 @@ spec:
     - protocol: TCP
       port: 80         # Port on the cluster
       targetPort: 80   # Port on the container
-  type: NodePort       # Expose the service on a port accessible externally
+  type: NodePort       # Expose the service on a port accessible externall
