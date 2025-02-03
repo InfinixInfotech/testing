@@ -31,7 +31,7 @@ jobs:
         run: npm run build
 
       - name: Upload Build Artifacts
-      - uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifact
           path: dist/
@@ -53,22 +53,22 @@ jobs:
       - name: Stop and Remove Old Docker Container
         run: |
           # Check if the container exists and stop it if running
-          if (docker ps -q -f "name=infinixmailboxfrontend") {
+          if (docker ps -q -f "name=infinixmailboxfrontend"); then
             docker stop infinixmailboxfrontend
-          } else {
-            Write-Host "No running container found to stop."
-          }
+          else
+            echo "No running container found to stop."
+          fi
           
           # Check if the container exists and remove it if present
-          if (docker ps -a -q -f "name=infinixmailboxfrontend") {
+          if (docker ps -a -q -f "name=infinixmailboxfrontend"); then
             docker rm infinixmailboxfrontend
-          } else {
-            Write-Host "No container found to remove."
-          }
+          else
+            echo "No container found to remove."
+          fi
 
       - name: Deploy New Docker Container
         run: |
           # Run the new container on port 80 (accessible via local IP)
           docker run -d -p 80:80 --name infinixmailboxfrontend infinixmailboxfrontend:latest
-          # Verifyif the container is running
+          # Verify if the container is running
           docker ps
