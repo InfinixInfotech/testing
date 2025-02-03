@@ -51,8 +51,8 @@ const EmailDetails = () => {
     if (allData.templatetype === 'birthday') {
       setHeaderImage('https://plus.unsplash.com/premium_photo-1683140472983-e72b689c8c6d?q=80&w=2118&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');  // Add appropriate image path
     } else if (allData.templatetype === 'promotion') {
-      setHeaderImage('https://img.freepik.com/free-vector/realistic-class-2023-background_52683-109953.jpg?t=st=1734679186~exp=1734682786~hmac=ae1bbddb3519022cc31f3345b2da92bdf2b3d792d0254442c7b2817e2c2373d9&w=1380');  // Add appropriate image path
-    } else if (allData.templatetype === 'targetAchieved') {
+      setHeaderImage('https://plus.unsplash.com/premium_photo-1713628398071-becbbdb971db?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjgyfHxzdWNjZXNzfGVufDB8fDB8fHww');  // Add appropriate image path
+    } else if (allData.templatetype === 'target achieved') {
       setHeaderImage('https://img.freepik.com/premium-vector/falling-confetti-blue-background_257584-927.jpg?ga=GA1.1.2127501896.1730961765&semt=ais_hybrid');  // Add appropriate image path
     }
   }, [allData.templatetype]);
@@ -480,18 +480,30 @@ const EmailDetails = () => {
           }}
         >
           <div
+            // style={{
+            //   position: "relative",
+            //   height: "300px",
+            //   textAlign: "center",
+            //   background: headerImage
+            //     ? `url(${headerImage})`
+            //     : "linear-gradient(45deg, #6a11cb, #2575fc)",
+            //   backgroundSize: "cover",
+            //   backgroundPosition: "center",
+            //   color: "white",
+            //   borderRadius: "0px",
+            //   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)",
+            // }}
             style={{
               position: "relative",
-              height: "300px",
+              height: "400px", // Adjust height based on content or set it dynamically
               textAlign: "center",
               background: headerImage
-                ? `url(${headerImage})`
-                : "linear-gradient(45deg, #6a11cb, #2575fc)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+                   ? `url(${headerImage})`
+                   : "linear-gradient(45deg, #6a11cb, #2575fc)",
+              backgroundSize: "cover", // Ensures the full image is shown
+              backgroundRepeat: "no-repeat", // Avoid tiling
               color: "white",
-              borderRadius: "0px",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
             }}
           >
             <h1
@@ -744,7 +756,7 @@ const EmailDetails = () => {
 
                   case 'promotion':
                   case 'birthday':
-                  case 'targetAchieved':
+                  case 'target achieved':
                     return (
                       <PreviewCelebrationPoster
                         headerTitle={subjectParts[0] || ''}

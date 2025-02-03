@@ -6,8 +6,8 @@ import Select from "react-select";
 import { getAllEmpCodeNameThunk, postMailThunk } from "../../../Redux/Services/thunks/sendMailThunk";
 import { empCode } from "../../../Redux/Services/apiServer/ApiServer";
 
-const ModernPoster = () => {
-  const [messageType, setMessageType] = useState("birthday");
+const Promotion = () => {
+  const [messageType, setMessageType] = useState("promotion");
   const [finalMessageType, setFinalMessageType] = useState('');
 
   const [headerTitle, setHeaderTitle] = useState('');
@@ -21,14 +21,14 @@ const ModernPoster = () => {
 
   // Set message based on the selected type
   useEffect(() => {
-    if (messageType.toLowerCase() === 'birthday') {
-      setHeaderTitle("Happy Birthday [Employee's Name]!");
-      setHeaderSubtitle("🎂 Enjoy every moment of your special day! 🎂");
-      setHeaderDate("10-12-2024");
-      setBodyContent("<p>Today is a special day, and we want to take a moment to celebrate YOU! Your hard work, dedication, and positive attitude make a difference every day, and we are so grateful to have you as part of our team. From all of us at <strong>[Company Name]</strong>, <br><strong>we wish you:</strong> <br>✨ Success in all that you do, <br>✨ Great health and happiness, <br>✨ A year full of exciting opportunities. <br>Thank you for being such a valuable part of our team. Here's to another fantastic year ahead! 🥳 🎈 <strong>Enjoy your day to the fullest!</strong> 🎈</p>");
-      setCtaText("🎂 Enjoy every moment of your special day! 🎂");
-      setCtaLink("Thank you for everything you do for [Company Name]. We hope your birthday is as amazing as you are!");
-      setHeaderImage('https://plus.unsplash.com/premium_photo-1683140472983-e72b689c8c6d?q=80&w=2118&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');  // Add appropriate image path
+    if (messageType.toLowerCase() === 'promotion') {
+      setHeaderTitle("Congratulations on Your Promotion, [Employee's Name]!");
+      setHeaderSubtitle("🎉 Here's to new milestones and exciting opportunities! 🎉");
+      setHeaderDate("Team Lead");
+      setBodyContent("<p>We are thrilled to announce your well-deserved promotion at <strong>[Company Name]</strong>! Your hard work, dedication, and exceptional performance have been truly outstanding, and we are proud to have you as part of our team. <br><strong>We also want to celebrate your achievement of surpassing the targets set for this year:</strong> <br>✨ [Target Achievement Details], <br>✨ [Specific Milestone]. <br> Your relentless commitment to excellence and teamwork have played a crucial role in our success. We look forward to your continued growth and contribution in this new role. Congratulations once again, and here's to even greater achievements ahead! 🎯🎉</p>");
+      setCtaText("🎉 Cheers to your success and the exciting journey ahead! 🎉");
+      setCtaLink("We are incredibly proud of your progress and can't wait to see all the amazing things you'll accomplish in your new role at [Company Name].");
+      setHeaderImage('https://plus.unsplash.com/premium_photo-1713628398071-becbbdb971db?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjgyfHxzdWNjZXNzfGVufDB8fDB8fHww');  // Add appropriate image path
     }
   }, [messageType]);
 
@@ -805,4 +805,4 @@ const ModernPoster = () => {
   );
 };
 
-export default ModernPoster;
+export default Promotion;

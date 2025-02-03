@@ -62,9 +62,21 @@ const Sidebar = () => {
     },
     {
       to: "/template",
-      text: "Celebration",
+      text: "Birthday",
       id: "template",
     },
+    {
+      to: "/promotion",
+      text: "Promotion",
+      id: "promotion",
+    },
+
+    {
+      to: "/target",
+      text: "Target",
+      id: "target",
+    },
+    
     {
       to: "/warning",
       text: "Warning",

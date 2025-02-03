@@ -31,7 +31,7 @@ const LoginPage = () => {
         localStorage.setItem("authToken", data.response.token);
         localStorage.setItem("empCode", data.response.employeeCode);
         localStorage.setItem("userName", data.response.userName);
-        navigate("/dashboard");
+        navigate("/compose");
       } else {
         setError(data.response.message || "Login failed");
       }
@@ -44,7 +44,7 @@ const LoginPage = () => {
     <div className="Login-Conatiner">
       <div className="login-page">
         <div className="welcome-banner">
-          <h1>INFINIX-INFOTECH-PVT-LTD.</h1>
+          <h1>Welcome to Infinix Infotech</h1>
         </div>
         <div className="login-container">
           <h2>Login</h2>
