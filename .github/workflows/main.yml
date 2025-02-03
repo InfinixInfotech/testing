@@ -70,5 +70,5 @@ jobs:
         run: |
           # Run the new container on port 80 (accessible via local IP)
           docker run -d -p 80:80 --name infinixmailboxfrontend infinixmailboxfrontend:latest
-          # Verify if the container is running
+          # Verifyif the container is running
           docker ps
