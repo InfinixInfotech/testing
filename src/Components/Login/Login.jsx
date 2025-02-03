@@ -8,7 +8,6 @@ const LoginPage = () => {
   const [dob, setDob] = useState(""); 
   const [serialNo, setSerialNo] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -17,13 +16,13 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const userName = `WIN${name}`;
+    const userName = `INF${name}${dob}${serialNo}`;
 
     try {
       const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userName, password }),
+        body: JSON.stringify({ userName,password}),
       });
 
       const data = await response.json();
@@ -41,53 +40,66 @@ const LoginPage = () => {
     }
   };
 
-  const finalText = `WIN${name}`;
-
   return (
     <div className="Login-Conatiner">
       <div className="login-page">
         <div className="welcome-banner">
-          <h1>Welcome to WinWealthAlgos</h1>
+          <h1>Welcome to Infinix Infotech</h1>
         </div>
         <div className="login-container">
           <h2>Login</h2>
-          <div className="final-text">{finalText}</div>
           <form onSubmit={handleLogin}>
-            <div className="form-row">
-              <div className="form-group code-name-group">
-                <label>Code and Name</label>
-                <div className="code-name-wrapper">
-                  <input
-                    type="text"
-                    className="code-input"
-                    value="WIN"
-                    readOnly
-                  />
-                  <input
-                    type="text"
-                    className="name-input"
-                    value={name}
-                    onChange={(e) => setName(e.target.value.toUpperCase())}
-                  />
-                </div>
-              </div>
+
+            <div className="form-group">
+              <label>Code</label>
+              <input
+                type="text"
+                value="INF"
+                readOnly
+              />
             </div>
-            <div className="form-group password-group">
+            <div className="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                className="form-control text-uppercase"
+                value={name}
+                onChange={(e) => setName(e.target.value.toUpperCase())}
+              />
+            </div>
+            <div className="form-group">
+              <label>Date of Birth</label>
+              <input
+                type="number"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+                style={{
+                  WebkitAppearance: "none",
+                  MozAppearance: "textfield",
+                  appearance: "none",
+                }}
+              />
+            </div>
+            <div className="form-group">
+              <label>Serial No.</label>
+              <input
+                type="number"
+                value={serialNo}
+                onChange={(e) => setSerialNo(e.target.value)}
+                style={{
+                  WebkitAppearance: "none",
+                  MozAppearance: "textfield",
+                  appearance: "none",
+                }}
+              />
+            </div>
+            <div className="form-group">
               <label>Password</label>
-              <div className="password-wrapper">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <button
-                  type="button"
-                  className="toggle-password"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                   <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`}></i>
-                </button>
-              </div>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
             {error && <div className="error-message">{error}</div>}
             <button type="submit" className="login-btn">Login</button>

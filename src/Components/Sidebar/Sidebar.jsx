@@ -190,7 +190,7 @@ const Sidebar = () => {
       className="text-dark"
       style={{ fontSize: "1.0rem", fontWeight: "bold", color: "black"}}
     >
-      WinWealthAlgos
+      INFINIX INFOTECH
     </span>
     <span
       className="text-dark"

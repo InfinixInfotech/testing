@@ -22,9 +22,9 @@ const EmailDetails = () => {
     ""
   );
   const [ctaText, setCtaText] = useState("🎂 Enjoy every moment of your special day! 🎂");
-  const [ctaLink, setCtaLink] = useState("Thank you for everything you do for WinWealthAlgos.");
+  const [ctaLink, setCtaLink] = useState("Thank you for everything you do for Infinix Infotech. We hope your birthday is as amazing as you are!");
   const [footerText, setFooterText] = useState(
-    "© 2024 WinWealthAlgos Private Limited"
+    "© 2024 Infinix Infotech Private Limited"
   );
   const [allData, setAllData] = useState([]);
   const dispatch = useDispatch();

@@ -5,37 +5,21 @@ import Select from "react-select";
 
 const GeneralMail = () => {
     const [headerTitle, setHeaderTitle] = useState(
-        "Subject: Exciting Updates and Appreciation!"
+        "Formal Warning Regarding Conduct/Performance"
     );
     const [headerSubtitle, setHeaderSubtitle] = useState(
-        "Sharing Good News and Acknowledging Your Efforts"
+        "Addressing Recent Performance/Behavioral Issues"
     );
     const [document, setDocument] = useState("");
     const [headerDate, setHeaderDate] = useState("10 Dec 2024");
     const [bodyContent, setBodyContent] = useState(
-        `<p><strong>Dear [Employee's Name],</strong><br />
-        I hope this email finds you well. I am thrilled to share some exciting updates and take this opportunity to acknowledge your invaluable contributions to [Company Name].<br /><br />
-        <strong>Recent Achievements:</strong><br />
-        We are pleased to announce that [describe the achievement, e.g., our team has successfully launched the new product line, surpassed sales targets, or received positive client feedback]. Your hard work and dedication have played a significant role in achieving this milestone.<br /><br />
-        <strong>Your Contributions:</strong><br />
-        Specifically, your efforts in [specific task or responsibility, e.g., leading the project, ensuring timely deliveries, or maintaining excellent customer relationships] have been instrumental in this success. Your commitment and professionalism are deeply appreciated.<br /><br />
-        <strong>Looking Ahead:</strong><br />
-        As we move forward, we are excited about the opportunities ahead and are confident in your continued support and dedication. Please don’t hesitate to share any ideas or feedback that can help us grow even further.<br /><br />
-        <strong>Support and Collaboration:</strong><br />
-        We remain committed to fostering a positive and collaborative work environment. If there’s anything you need or wish to discuss, feel free to reach out to [manager/HR representative].<br /><br />
-        Once again, thank you for all that you do. Let’s continue to work together to achieve even greater heights!<br /><br />
-        Best regards,<br />
-        [Your Name]<br />
-        [Your Position]<br />
-        [Company Name]<br />
-        [Contact Information]</p>`
+        "<p><strong>Dear [Employee's Name],</strong><br />I hope this email finds you well. I am writing to formally address certain concerns regarding your [conduct/performance] at [Company Name].<br /><br /><strong>Issue Summary:</strong><br />On [specific date(s)], it was observed that [describe the behavior or performance issue briefly, e.g., you were late to work on multiple occasions, your recent project submissions have not met the expected standards, or there was an incident involving unprofessional behavior].<br /><br /><strong>Impact:</strong><br />This [behavior/performance] has negatively impacted [team morale/workflow/customer satisfaction/company goals], and it is important that we address this matter promptly to ensure a productive and professional work environment for everyone.<br /><br /><strong>Expected Improvement:</strong><br />We expect you to take the following actions to rectify the situation:<br />[Specific action item, e.g., Ensure punctuality and adherence to work schedules.]<br />[Specific action item, e.g., Maintain professionalism when interacting with colleagues and clients.]<br />[Specific action item, e.g., Meet the deadlines and quality standards for your projects.]<br /><br /><strong>Support and Next Steps:</strong><br />We are committed to supporting your success at [Company Name]. If there are challenges or concerns you’re facing that may be contributing to this issue, please do not hesitate to discuss them with [manager/HR representative]. We can explore resources or training opportunities to assist you in improving your performance.<br /><br /><strong>Consequences:</strong><br />Please note that failure to address and improve upon these concerns may result in further disciplinary action, up to and including termination of employment, as outlined in the company policy.<br /><br />I trust that you will take this feedback seriously and work diligently to make the necessary improvements. Please confirm receipt of this email and let me know if you have any questions or require clarification.<br /><br />Best regards,<br />[Your Name]<br />[Your Position]<br />[Company Name]<br />[Contact Information]</p>"
     );
-    const [ctaText, setCtaText] = useState("🌟 Keep up the great work! 🌟");
-    const [ctaLink, setCtaLink] = useState("We’re proud to have you on the team and look forward to achieving more milestones together.");
+    const [ctaText, setCtaText] = useState("🎂 Enjoy every moment of your special day! 🎂");
+    const [ctaLink, setCtaLink] = useState("Thank you for everything you do for [Company Name]. We hope your birthday is as amazing as you are!");
     const [footerText, setFooterText] = useState(
-        "© 2024 WinWealthAlgos Private Limited"
+        "© 2024 Infinix Infotech Private Limited"
     );
-    
     const [isPreview, setIsPreview] = useState(false);
     const [fontSize, setFontSize] = useState(36);
 

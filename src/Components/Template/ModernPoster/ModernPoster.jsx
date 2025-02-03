@@ -48,7 +48,7 @@ const ModernPoster = () => {
 
 
   const [footerText, setFooterText] = useState(
-   "© 2024 WinWealthAlgos Private Limited"
+    "© 2024 Infinix Infotech Private Limited"
   );
   const [editorContent, setEditorContent] = useState(bodyContent);
   const [isPreview, setIsPreview] = useState(false);

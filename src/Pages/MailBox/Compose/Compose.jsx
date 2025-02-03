@@ -12,37 +12,21 @@ import { empCode } from "../../../Redux/Services/apiServer/ApiServer";
 const Compose = () => {
 
     const [headerTitle, setHeaderTitle] = useState(
-        "Subject: Exciting Updates and Appreciation!"
+        "Formal Warning Regarding Conduct/Performance"
     );
     const [headerSubtitle, setHeaderSubtitle] = useState(
-        "Sharing Good News and Acknowledging Your Efforts"
+        "Addressing Recent Performance/Behavioral Issues"
     );
     const [document, setDocument] = useState("");
     const [headerDate, setHeaderDate] = useState("10 Dec 2024");
     const [bodyContent, setBodyContent] = useState(
-        `<p><strong>Dear [Employee's Name],</strong><br/>
-        I hope this email finds you well. I am thrilled to share some exciting updates and take this opportunity to acknowledge your invaluable contributions to [Company Name].<br /><br />
-        <strong>Recent Achievements:</strong><br />
-        We are pleased to announce that [describe the achievement, e.g., our team has successfully launched the new product line, surpassed sales targets, or received positive client feedback]. Your hard work and dedication have played a significant role in achieving this milestone.<br /><br />
-        <strong>Your Contributions:</strong><br />
-        Specifically, your efforts in [specific task or responsibility, e.g., leading the project, ensuring timely deliveries, or maintaining excellent customer relationships] have been instrumental in this success. Your commitment and professionalism are deeply appreciated.<br /><br />
-        <strong>Looking Ahead:</strong><br />
-        As we move forward, we are excited about the opportunities ahead and are confident in your continued support and dedication. Please don’t hesitate to share any ideas or feedback that can help us grow even further.<br /><br />
-        <strong>Support and Collaboration:</strong><br />
-        We remain committed to fostering a positive and collaborative work environment. If there’s anything you need or wish to discuss, feel free to reach out to [manager/HR representative].<br /><br />
-        Once again, thank you for all that you do. Let’s continue to work together to achieve even greater heights!<br /><br />
-        Best regards,<br />
-        [Your Name]<br />
-        [Your Position]<br />
-        [Company Name]<br />
-        [Contact Information]</p>`
+        "<p><strong>Dear [Employee's Name],</strong><br />I hope this email finds you well. I am writing to formally address certain concerns regarding your [conduct/performance] at [Company Name].<br /><br /><strong>Issue Summary:</strong><br />On [specific date(s)], it was observed that [describe the behavior or performance issue briefly, e.g., you were late to work on multiple occasions, your recent project submissions have not met the expected standards, or there was an incident involving unprofessional behavior].<br /><br /><strong>Impact:</strong><br />This [behavior/performance] has negatively impacted [team morale/workflow/customer satisfaction/company goals], and it is important that we address this matter promptly to ensure a productive and professional work environment for everyone.<br /><br /><strong>Expected Improvement:</strong><br />We expect you to take the following actions to rectify the situation:<br />[Specific action item, e.g., Ensure punctuality and adherence to work schedules.]<br />[Specific action item, e.g., Maintain professionalism when interacting with colleagues and clients.]<br />[Specific action item, e.g., Meet the deadlines and quality standards for your projects.]<br /><br /><strong>Support and Next Steps:</strong><br />We are committed to supporting your success at [Company Name]. If there are challenges or concerns you’re facing that may be contributing to this issue, please do not hesitate to discuss them with [manager/HR representative]. We can explore resources or training opportunities to assist you in improving your performance.<br /><br /><strong>Consequences:</strong><br />Please note that failure to address and improve upon these concerns may result in further disciplinary action, up to and including termination of employment, as outlined in the company policy.<br /><br />I trust that you will take this feedback seriously and work diligently to make the necessary improvements. Please confirm receipt of this email and let me know if you have any questions or require clarification.<br /><br />Best regards,<br />[Your Name]<br />[Your Position]<br />[Company Name]<br />[Contact Information]</p>"
     );
-    const [ctaText, setCtaText] = useState("🌟 Keep up the great work! 🌟");
-    const [ctaLink, setCtaLink] = useState("We’re proud to have you on the team and look forward to achieving more milestones together.");
+    const [ctaText, setCtaText] = useState("🎂 Enjoy every moment of your special day! 🎂");
+    const [ctaLink, setCtaLink] = useState("Thank you for everything you do for [Company Name]. We hope your birthday is as amazing as you are!");
     const [footerText, setFooterText] = useState(
-        "© 2024 WinWealthAlgos Private Limited"
+        "© 2024 Infinix Infotech Private Limited"
     );
-    
     const [isPreview, setIsPreview] = useState(false);
     const [fontSize, setFontSize] = useState(36);
 
@@ -57,52 +41,13 @@ const Compose = () => {
     const dispatch = useDispatch();
 
     const { data, loading, error } = useSelector((state) => state.sendMail);
-
-
+    
+  
     useEffect(() => {
         dispatch(getAllEmpCodeNameThunk());
         console.log("data-----------------" + data);
     }, [dispatch]);
-
-    const [selectedValues, setSelectedValues] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
-
-    useEffect(() => {
-        if (data && typeof data === "object" && !Array.isArray(data) && data.data) {
-            const groupMap = {};
-            const individualOptions = [];
-
-            // Process individual employees and group them by groupName
-            data.data.forEach((item) => {
-                const groupName = item.groupName;
-                if (!groupMap[groupName]) {
-                    groupMap[groupName] = [];
-                }
-                groupMap[groupName].push(item.employeeCode);
-
-                individualOptions.push({
-                    value: item.employeeCode,
-                    label: `${item.employeeCode} - ${item.employeeName}`,
-                });
-            });
-
-            // Create group-level options
-            const groupOptions = Object.keys(groupMap).map((groupName) => ({
-                value: groupName,
-                label: `${groupName} (All Members)`,
-                isGroup: true,
-                members: groupMap[groupName],
-            }));
-
-            // Combine group and individual options
-            const transformedOptions = [...groupOptions, ...individualOptions];
-
-            setSelectedValues(transformedOptions);
-        } else {
-            console.log("data is not valid or data.data is undefined");
-        }
-    }, [data]);
-
+    
     useEffect(() => {
         if (data && typeof data === 'object' && !Array.isArray(data) && data.data) {
             console.log("data if-----------------", data);
@@ -118,33 +63,8 @@ const Compose = () => {
             console.log("data is not valid or data.data is undefined");
         }
     }, [data]);
-
-
-    const handleSelect = (selectedOption) => {
-        setFormData((prev) => ({
-            ...prev,
-            to: [],  // Clear 'to' field
-        }));
-
-        if (selectedOption.isGroup) {
-            setFormData((prev) => ({
-                ...prev,
-                to: [...new Set([...prev.to, ...selectedOption.members])], // Add group members
-            }));
-        } else {
-            setFormData((prev) => ({
-                ...prev,
-                to: [...new Set([...prev.to, selectedOption.value])], // Add single value
-            }));
-        }
-    };
-
-    // Filter options based on the search input
-    const filteredOptions = selectedValues.filter(option =>
-        option.label.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-
+    
+    
 
     const [formData, setFormData] = useState({
         to: [],
@@ -158,54 +78,54 @@ const Compose = () => {
         templatetype: "general",
         isImportant: false,
         employeeCode: "",
-    });
-    const [file, setFile] = useState(null);
-    const [previewUrl, setPreviewUrl] = useState(null);
-    const [zipContents, setZipContents] = useState([]);
-
-    const handleFileChange = async (event) => {
+      });
+      const [file, setFile] = useState(null);
+      const [previewUrl, setPreviewUrl] = useState(null);
+      const [zipContents, setZipContents] = useState([]);
+    
+      const handleFileChange = async (event) => {
         const selectedFile = event.target.files[0];
         if (selectedFile) {
-            setFile(selectedFile);
-
-            if (
-                selectedFile.type === "application/zip" ||
-                selectedFile.name.endsWith(".zip")
-            ) {
-                const zip = new JSZip();
-                const zipFileContents = [];
-                const fileReader = new FileReader();
-
-                fileReader.onload = async (e) => {
-                    try {
-                        const zipData = await zip.loadAsync(e.target.result);
-                        zipData.forEach((relativePath) => {
-                            zipFileContents.push(relativePath);
-                        });
-                        setZipContents(zipFileContents);
-                    } catch (err) {
-                        console.error("Error reading zip file:", err);
-                    }
-                };
-
-                fileReader.readAsArrayBuffer(selectedFile);
-                setPreviewUrl(null);
-            } else if (
-                selectedFile.type.startsWith("image/") ||
-                selectedFile.type === "application/pdf"
-            ) {
-                setPreviewUrl(URL.createObjectURL(selectedFile));
-                setZipContents([]);
-            } else {
-                setPreviewUrl(null);
-                setZipContents([]);
-            }
+          setFile(selectedFile);
+    
+          if (
+            selectedFile.type === "application/zip" ||
+            selectedFile.name.endsWith(".zip")
+          ) {
+            const zip = new JSZip();
+            const zipFileContents = [];
+            const fileReader = new FileReader();
+    
+            fileReader.onload = async (e) => {
+              try {
+                const zipData = await zip.loadAsync(e.target.result);
+                zipData.forEach((relativePath) => {
+                  zipFileContents.push(relativePath);
+                });
+                setZipContents(zipFileContents);
+              } catch (err) {
+                console.error("Error reading zip file:", err);
+              }
+            };
+    
+            fileReader.readAsArrayBuffer(selectedFile);
+            setPreviewUrl(null);
+          } else if (
+            selectedFile.type.startsWith("image/") ||
+            selectedFile.type === "application/pdf"
+          ) {
+            setPreviewUrl(URL.createObjectURL(selectedFile));
+            setZipContents([]);
+          } else {
+            setPreviewUrl(null);
+            setZipContents([]);
+          }
         }
-    };
-
-    const sendSMS = async () => {
+      };
+    
+      const sendSMS = async () => {
         const sendformdata = new FormData();
-
+    
         formData.to.forEach((to) => sendformdata.append("To", to));
         formData.cc.forEach((cc) => sendformdata.append("CC", cc));
         formData.bcc.forEach((bcc) => sendformdata.append("BCC", bcc));
@@ -217,13 +137,11 @@ const Compose = () => {
         sendformdata.append("Templatetype", formData.templatetype);
         sendformdata.append("isImportant", formData.isImportant);
         sendformdata.append("EmployeeCode", formData.employeeCode);
-        console.log(formData);
-
         if (file) {
             sendformdata.append("Attachment", file);
         }
         dispatch(postMailThunk(sendformdata));
-    };
+      };
 
     const handleMailSelectChange = (selectedOptions, action) => {
         const fieldName = action.name;
@@ -243,7 +161,7 @@ const Compose = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         alert("Email sent successfully!");
-        console.log(formData);
+        console.log(formData); 
     };
 
     const modules = {
@@ -348,7 +266,7 @@ const Compose = () => {
 
     return (
         <>
-            <div className="d-flex gap-3 " style={{ marginTop: "70px", position: "relative", width: "100%" }}>
+            <div className="d-flex gap-3 " style={{marginTop: "70px", position: "relative", width: "100%"}}>
                 <div
                     className="container-fluid py-3"
                     style={{ padding: "1px 1px", width: "50%", marginLeft: "0" }}
@@ -358,53 +276,19 @@ const Compose = () => {
                         style={{ background: "rgb(227,227,227)", border: "1px solid black" }}
                     >
                         <form onSubmit={handleMailSubmit}>
-                            <div className="form-group mt-2" style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
-                                <label className="compose-label" style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '5px', color: '#333' }}>
-                                    To:
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="Search..."
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                    style={{
-                                        width: '100%',
-                                        padding: '8px 12px',
-                                        marginBottom: '10px',
-                                        border: '1px solid #ccc',
-                                        borderRadius: '4px',
-                                        fontSize: '14px',
-                                        color: '#555',
-                                        backgroundColor: '#fff',
-                                        transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
-                                    }}
+                            {/* TO Field with Multi-Select and Search */}
+                            <div className="form-group mt-2">
+                                <label className="compose-lable">To:</label>
+                                <Select
+                                    isMulti
+                                    name="to"
+                                    options={options}
+                                    className="basic-multi-select"
+                                    classNamePrefix="select"
+                                    placeholder="Add recipient emails"
+                                    onChange={handleMailSelectChange}
                                 />
-                                <select
-                                    className="custom-select"
-                                    onChange={(e) => handleSelect(selectedValues.find(o => o.value === e.target.value))}
-                                    style={{
-                                        width: '100%',
-                                        padding: '8px 12px',
-                                        border: '1px solid #ccc',
-                                        borderRadius: '4px',
-                                        fontSize: '14px',
-                                        color: '#555',
-                                        backgroundColor: '#fff',
-                                        transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
-                                    }}
-                                    onFocus={(e) => e.target.style.borderColor = '#007bff'}
-                                    onBlur={(e) => e.target.style.borderColor = '#ccc'}
-                                >
-                                    <option value="">Select an option</option>
-                                    {filteredOptions.map((option) => (
-                                        <option key={option.value} value={option.value}>
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </select>
                             </div>
-
-
 
                             {/* CC Field with Multi-Select and Search */}
                             <div className="form-group mt-2">
