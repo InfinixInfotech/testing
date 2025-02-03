@@ -37,24 +37,20 @@ jobs:
 
   deploy:
     name: Deploy to Docker
-    needs: build  # Ensure 'deploy' depends on 'build'
-    runs-on: [self-hosted, "MAYANK"]  # Use the self-hosted runner with the "MAYANK" label
+    needs: build
+    runs-on: [self-hosted, "MAYANK"]
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Build Docker Image
-        run: |
-          # Build the Docker image locally and tag it as 'latest'
-          docker build -t infinixmailboxfrontend:latest .
-
       - name: Stop and Remove Old Docker Container
-        shell: pwsh
+        shell: powershell
         run: |
           $container = docker ps -q -f "name=infinixmailboxfrontend"
           if ($container) {
               docker stop infinixmailboxfrontend
+              Write-Host "Stopped running container."
           } else {
               Write-Host "No running container found to stop."
           }
@@ -62,13 +58,13 @@ jobs:
           $container = docker ps -a -q -f "name=infinixmailboxfrontend"
           if ($container) {
               docker rm infinixmailboxfrontend
+              Write-Host "Removed old container."
           } else {
               Write-Host "No container found to remove."
           }
 
+      - name: Build Docker Image
+        run: docker build -t infinixmailboxfrontend:latest .
+
       - name: Deploy New Docker Container
-        run: |
-          # Run the new container on port 80 (accessible via local IP)
-          docker run -d -p 80:80 --name infinixmailboxfrontend infinixmailboxfrontend:latest
-          # Verify if the container is running
-          docker ps
+        run: docker run -d -p 80:80 --name infinixmailboxfrontend infinixmailboxfrontend:latest
