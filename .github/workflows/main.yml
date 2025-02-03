@@ -1,4 +1,3 @@
-
 name: CI/CD Pipeline for Frontend
 
 on:
@@ -51,20 +50,21 @@ jobs:
           docker build -t infinixmailboxfrontend:latest .
 
       - name: Stop and Remove Old Docker Container
+        shell: pwsh
         run: |
-          # Check if the container exists and stop it if running
-          if (docker ps -q -f "name=infinixmailboxfrontend"); then
-            docker stop infinixmailboxfrontend
-          else
-            echo "No running container found to stop."
-          fi
-          
-          # Check if the container exists and remove it if present
-          if (docker ps -a -q -f "name=infinixmailboxfrontend"); then
-            docker rm infinixmailboxfrontend
-          else
-            echo "No container found to remove."
-          fi
+          $container = docker ps -q -f "name=infinixmailboxfrontend"
+          if ($container) {
+              docker stop infinixmailboxfrontend
+          } else {
+              Write-Host "No running container found to stop."
+          }
+
+          $container = docker ps -a -q -f "name=infinixmailboxfrontend"
+          if ($container) {
+              docker rm infinixmailboxfrontend
+          } else {
+              Write-Host "No container found to remove."
+          }
 
       - name: Deploy New Docker Container
         run: |
