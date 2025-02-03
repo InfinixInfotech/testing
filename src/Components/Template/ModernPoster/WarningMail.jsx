@@ -24,7 +24,7 @@ const WarningMail = () => {
     const [ctaText, setCtaText] = useState("🎂 Enjoy every moment of your special day! 🎂");
     const [ctaLink, setCtaLink] = useState("Thank you for everything you do for [Company Name]. We hope your birthday is as amazing as you are!");
     const [footerText, setFooterText] = useState(
-        "© 2024 Infinix Infotech Private Limited"
+        "© 2024 WinWealthAlgos Private Limited"
     );
     const [isPreview, setIsPreview] = useState(false);
     const [fontSize, setFontSize] = useState(36);

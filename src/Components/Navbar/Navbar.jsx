@@ -30,7 +30,7 @@ const Navbar = () => {
           className="navbar-text text-white"
           style={{ fontSize: "1.5rem", fontWeight: "bold" }}
         >
-          INFINIX INFOTECH
+          WinWealthAlgos
         </span>
     
       <span

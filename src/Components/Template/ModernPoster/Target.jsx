@@ -6,8 +6,8 @@ import Select from "react-select";
 import { getAllEmpCodeNameThunk, postMailThunk } from "../../../Redux/Services/thunks/sendMailThunk";
 import { empCode } from "../../../Redux/Services/apiServer/ApiServer";
 
-const ModernPoster = () => {
-  const [messageType, setMessageType] = useState("birthday");
+const Target = () => {
+  const [messageType, setMessageType] = useState("target achieved");
   const [finalMessageType, setFinalMessageType] = useState('');
 
   const [headerTitle, setHeaderTitle] = useState('');
@@ -21,14 +21,14 @@ const ModernPoster = () => {
 
   // Set message based on the selected type
   useEffect(() => {
-    if (messageType.toLowerCase() === 'birthday') {
-      setHeaderTitle("Happy Birthday [Employee's Name]!");
-      setHeaderSubtitle("🎂 Enjoy every moment of your special day! 🎂");
-      setHeaderDate("10-12-2024");
-      setBodyContent("<p>Today is a special day, and we want to take a moment to celebrate YOU! Your hard work, dedication, and positive attitude make a difference every day, and we are so grateful to have you as part of our team. From all of us at <strong>[Company Name]</strong>, <br><strong>we wish you:</strong> <br>✨ Success in all that you do, <br>✨ Great health and happiness, <br>✨ A year full of exciting opportunities. <br>Thank you for being such a valuable part of our team. Here's to another fantastic year ahead! 🥳 🎈 <strong>Enjoy your day to the fullest!</strong> 🎈</p>");
-      setCtaText("🎂 Enjoy every moment of your special day! 🎂");
-      setCtaLink("Thank you for everything you do for [Company Name]. We hope your birthday is as amazing as you are!");
-      setHeaderImage('https://plus.unsplash.com/premium_photo-1683140472983-e72b689c8c6d?q=80&w=2118&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');  // Add appropriate image path
+   if (messageType.toLowerCase() === 'target achieved') {
+      setHeaderTitle("Congratulations on Achieving Your Target, [Employee's Name]!");
+      setHeaderSubtitle("🏆 Your hard work and dedication have paid off! 🏆");
+      setHeaderDate("Target Achieved");
+      setBodyContent("<p>Congratulations on reaching and surpassing your targets for this period at <strong>[Company Name]</strong>! Your commitment and determination have been exceptional, and this achievement reflects your outstanding efforts. <br><strong>We want to celebrate the following milestones you've achieved:</strong> <br>✨ [Target Achievement Details], <br>✨ [Specific Milestone]. <br> Your contributions have made a real difference, and we look forward to even greater accomplishments in the future. Well done, and keep up the fantastic work! 🎯🚀</p>");
+      setCtaText("🏆 Here's to many more successes ahead! 🏆");
+      setCtaLink("We are proud of your achievement and excited to see you continue to excel at [Company Name].");
+      setHeaderImage('https://img.freepik.com/premium-vector/falling-confetti-blue-background_257584-927.jpg?ga=GA1.1.2127501896.1730961765&semt=ais_hybrid');  // Add appropriate image path
     }
   }, [messageType]);
 
@@ -805,4 +805,4 @@ const ModernPoster = () => {
   );
 };
 
-export default ModernPoster;
+export default Target;

@@ -17,6 +17,8 @@ import EmailDetails from "./Pages/EmailDetails/EmailDetails";
 import DraftEdit from "./Pages/DraftEdit/DraftEdit ";
 import Login from "./Components/Login/Login"
 import ProtecteRoute from "./Components/ProtectedRooute/ProtectRoute";
+import Promotion from "./Components/Template/ModernPoster/Promotion";
+import Target from "./Components/Template/ModernPoster/Target";
 
 
 export default function App() {
@@ -46,6 +48,8 @@ export default function App() {
                       <Route path="/template" element={<Template />} />
                       <Route path="/warning" element={<WarningMail />} />
                       <Route path="/general" element={<GeneralMail />} />
+                      <Route path="/promotion"element={<Promotion />} />
+                      <Route path="/target" element={<Target/>} />
 
                     </Routes>
                   </div>

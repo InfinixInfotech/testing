@@ -62,9 +62,21 @@ const Sidebar = () => {
     },
     {
       to: "/template",
-      text: "Celebration",
+      text: "Birthday",
       id: "template",
     },
+    {
+      to: "/promotion",
+      text: "Promotion",
+      id: "promotion",
+    },
+
+    {
+      to: "/target",
+      text: "Target",
+      id: "target",
+    },
+    
     {
       to: "/warning",
       text: "Warning",
@@ -178,7 +190,7 @@ const Sidebar = () => {
       className="text-dark"
       style={{ fontSize: "1.0rem", fontWeight: "bold", color: "black"}}
     >
-      INFINIX INFOTECH
+      WinWealthAlgos
     </span>
     <span
       className="text-dark"
